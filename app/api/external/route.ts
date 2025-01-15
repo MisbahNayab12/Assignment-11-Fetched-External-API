@@ -15,9 +15,9 @@ export const GET = async () => {
         console.log(data)
 
         return NextResponse.json({ data: data }, { status: 200 })
-    } catch (error: any) {
+    } catch (error: unknown) {
         return NextResponse.json(
-            { success: false, message: "received an error", error: error.message }
+            { success: false, message: "received an error",  error: error instanceof Error ? error.message : "Unknown error" }, { status: 500 }
         )
     }
 }
